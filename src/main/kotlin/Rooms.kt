@@ -9,19 +9,25 @@ enum class Items(val dmg: Int, val dur: Int, val Equipable: Boolean) {
 }
 
 
-class GenerateRandomRoom {
-    private fun GenerateEnemy(): Enemies {
-        return Enemies.values().toList().shuffled().first()
-    }
-
-    fun GenerateRoom() {
-
-    }
-
-    fun Room() {
+class Rooms {
+    fun Room(number: Int) {
         val spawn = Random.nextInt(1,4)
         if (spawn == 3) {
-            GenerateEnemy()
+            Enemy().GenerateEnemy()
         }
+        if (number == 1) {
+            // Make the first room here.
+            return
+        } else if (number == 2) {
+            // second room here.
+            return
+        }
+
+    }
+}
+
+class Enemy {
+    fun GenerateEnemy(): Enemies {
+        return Enemies.values().toList().shuffled().first()
     }
 }

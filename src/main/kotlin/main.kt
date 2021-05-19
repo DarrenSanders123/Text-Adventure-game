@@ -23,6 +23,6 @@ fun startRoom(username: String) {
     MoveToFirstRoom()
 }
 fun MoveToFirstRoom() {
-    GenerateRandomRoom().Room()
+    Rooms().Room(1)
 }
 
