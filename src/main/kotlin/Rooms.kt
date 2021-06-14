@@ -1,33 +1,26 @@
 import kotlin.random.Random
 
-enum class Enemies(val att: Int, val hp: Int) {
-    GOBLIN(10,1), DRAGON(30,100), WIZARD(20,30)
+enum class Enemies(val att: Int, var hp: Float, val def: Float) {
+    GOBLIN(10,1f, 1f), DRAGON(30,100f, 2f), WIZARD(20,30f, 1f)
 }
 
 enum class Items(val dmg: Int, val dur: Int, val Equipable: Boolean) {
-    SWORD(5, 25, true), BOW(10, 20, true), BUCKET(0, 9999, false), DAGGER(6, 20, true), WAND(20, 5, true), ARROW(0, 9999, false), BOOK(0, 9999, false)
+    FIST(1, 99999999, true), SWORD(5, 25, true), BOW(10, 20, true), BUCKET(0, 9999, false), DAGGER(6, 20, true), WAND(20, 5, true), ARROW(0, 9999, false), BOOK(0, 9999, false)
 }
-
 
 class Rooms {
-    fun Room(number: Int) {
-        val spawn = Random.nextInt(1,4)
-        if (spawn == 3) {
-            Enemy().GenerateEnemy()
+    fun GenerateRoom() {
+        println("You entered the next room what do you want to do? (Search, Next room)")
+        val option = readLine()!!
+        if (option.toLowerCase() == "search") {
+            Search().ResetSearches()
+            Search().Search()
+        } else if (option.toLowerCase() == "next room") {
+            Search().ResetSearches()
+            GenerateRoom()
+        } else {
+            Main().OptionNotFound()
+            GenerateRoom()
         }
-        if (number == 1) {
-            // Make the first room here.
-            return
-        } else if (number == 2) {
-            // second room here.
-            return
-        }
-
-    }
-}
-
-class Enemy {
-    fun GenerateEnemy(): Enemies {
-        return Enemies.values().toList().shuffled().first()
     }
 }
