@@ -20,7 +20,7 @@ class Main {
         println("This is the Start room, from here you can go and explore the wild.\nPress enter to start!")
         readLine()
         Tools().clearScreen()
-        Inventory.AddItem(Items.SWORD)
+        Inventory.AddItem(Items.FIST)
         MoveToNextRoom()
     }
     fun MoveToNextRoom() {
