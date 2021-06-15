@@ -3,47 +3,22 @@ class Inventory {
 
     }
 
-    fun Remove(Item: Items) {
-
+    fun RemoveItem(item: Items) {
+        inventory.remove(item)
     }
     fun Show(Item: Items) {
 
     }
 
     fun InInventory(item: Items): String {
-        return if (inventory.contains(item)) {
-            "Available"
-        } else {
-            "Not Available"
-        }
+        return if (inventory.contains(item)) "Available" else "Not Available"
     }
 
     fun ShowCountOfItem(item: Items): String {
-        var count = 0
-
-        for (Item in inventory.toList()) {
-            when (Item.name) {
-                item.name -> {
-                    count++
-                    inventory.remove(item)
-                }
-                else -> continue
-            }
-        }
-        return "${count}x ${item.name}"
+        return "${inventory.filter { it == item }.size}x ${item.name}"
     }
     fun CountOfItem(item: Items): Int {
-        var count = 0
-
-        for (Item in inventory.toList()) {
-            when (Item.name) {
-                item.name -> {
-                    count++
-                    inventory.remove(item)
-                }
-                else -> continue
-            }
-        }
-        return count
+        return inventory.filter { it == item }.size
     }
+
 }

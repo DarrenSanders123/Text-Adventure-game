@@ -85,7 +85,7 @@ class Player() {
         } else if (input.toLowerCase() == "defend") {
             defend(item, enemy)
         } else {
-            Main().OptionNotFound()
+            Tools().OptionNotFound()
             FightOrDefend(item, enemy)
         }
     }

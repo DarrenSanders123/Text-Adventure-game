@@ -1,12 +1,8 @@
 class GenerateRandom {
     fun GenerateItem(): Items {
-        val item = Items.values().toList().shuffled().first()
-            if (item != Items.FIST) {
-                return item
-            } else {
-                GenerateItem()
-            }
-        return item
+        return Items.values().toList().shuffled().first().let { item ->
+            if (item != Items.FIST) return item else GenerateItem()
+        }
     }
     fun GenerateEnemy(): Enemies {
         return Enemies.values().toList().shuffled().first()

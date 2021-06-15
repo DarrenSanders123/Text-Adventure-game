@@ -10,17 +10,23 @@ enum class Items(val dmg: Int, val dur: Int, val Equipable: Boolean) {
 
 class Rooms {
     fun GenerateRoom() {
-        println("You entered the next room what do you want to do? (Search, Next room)")
-        val option = readLine()!!
-        if (option.toLowerCase() == "search") {
-            Search().ResetSearches()
-            Search().Search()
-        } else if (option.toLowerCase() == "next room") {
-            Search().ResetSearches()
-            GenerateRoom()
-        } else {
-            Main().OptionNotFound()
-            GenerateRoom()
+        if (Main().GameRunning()) {
+            println("You entered the next room what do you want to do? (Search, Next room)")
+            val option = readLine()!!
+            when {
+                option.toLowerCase() == "search" -> {
+                    Search().ResetSearches()
+                    Search().Search()
+                }
+                option.toLowerCase() == "next room" -> {
+                    Search().ResetSearches()
+                    GenerateRoom()
+                }
+                else -> {
+                    Tools().OptionNotFound()
+                    GenerateRoom()
+                }
+            }
         }
     }
 }

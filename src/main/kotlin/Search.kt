@@ -2,11 +2,10 @@ import kotlin.random.Random
 
 class Search {
 
-    @Suppress("PrivatePropertyName")
-    public var Searched = 0
-    public var maxSearches = Random.nextInt(1, 3)
+    private var Searched = 0
+    var maxSearches = Random.nextInt(1, 3)
 
-    fun CheckSearches(): Boolean {
+    private fun CheckSearches(): Boolean {
         return Searched <= maxSearches
     }
 
@@ -17,18 +16,16 @@ class Search {
 
     fun Search() {
         if (CheckSearches()) {
-            print("Searching =")
+            print("Searching ")
             var amount = 0
             while (amount < 10) {
                 print("==")
-                Thread.sleep(1000)
+                Thread.sleep(500)
                 amount++
             }
             println()
             val chanceToFindEnemy = Random.nextInt(1, 5).let { chance ->
-                if (chance != 0) {
-                    FoundAEnemy(GenerateRandom().GenerateEnemy())
-                } else {
+                if (chance == 4) FoundAEnemy(GenerateRandom().GenerateEnemy()) else {
                     val chanceToFindItem = Random.nextInt(1, 3).let { chance ->
                         if (chance == 2) {
                             FoundAItem(GenerateRandom().GenerateItem())
@@ -53,7 +50,9 @@ class Search {
             if (backpack.contains(item.name)) {
                 if (item.name == "ARROW") {
                     var amount = Random.nextInt(1, 5)
+
                     println("${amount}x ${item.name} added to inventory.")
+
                     while (amount > 0) {
                         Inventory.AddItem(item)
                         amount -= 1
@@ -92,18 +91,23 @@ class Search {
         }
         enemyDisplay(enemy)
         val option = readLine()!!
-        if (option.toLowerCase() == "fight") {
-            Player().FightOrDefend(Items.SWORD, enemy)
-        } else if (option.toLowerCase() == "fight bow") {
-            Player().FightOrDefend(Items.BOW, enemy)
-        } else if (option.toLowerCase() == "run") {
-            Player().run()
-        } else {
-            Main().OptionNotFound()
-            FoundAEnemy(enemy)
+        when {
+            option.toLowerCase() == "fight" -> {
+                Player().FightOrDefend(Items.SWORD, enemy)
+            }
+            option.toLowerCase() == "fight bow" -> {
+                Player().FightOrDefend(Items.BOW, enemy)
+            }
+            option.toLowerCase() == "run" -> {
+                Player().run()
+            }
+            else -> {
+                Tools().OptionNotFound()
+                FoundAEnemy(enemy)
+            }
         }
     }
-    fun Option() {
+    private fun Option() {
         if (CheckSearches()) {
             println("""
                             Select a option:
@@ -111,12 +115,8 @@ class Search {
                                 [Next Room]
                         """.trimIndent())
             val option = readLine()!!
-            if (option.toLowerCase() == "search") {
-                Search()
-            } else if (option.toLowerCase() == "next room") {
-                Rooms().GenerateRoom()
-            } else {
-                Main().OptionNotFound()
+            if (option.toLowerCase() == "search") Search() else if (option.toLowerCase() == "next room") Rooms().GenerateRoom() else {
+                Tools().OptionNotFound()
                 Option()
             }
         } else {
@@ -126,10 +126,8 @@ class Search {
                                 [Next Room]
                         """.trimIndent())
             val option = readLine()!!
-            if (option.toLowerCase() == "next room") {
-                Rooms().GenerateRoom()
-            } else {
-                Main().OptionNotFound()
+            if (option.toLowerCase() == "next room") Rooms().GenerateRoom() else {
+                Tools().OptionNotFound()
                 Option()
             }
         }
