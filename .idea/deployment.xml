@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="NAS" uploadOnCheckin="06f25dcf-0a91-4c36-b49a-b65c954c81ce" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" serverName="NAS" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
       <paths name="NAS">
         <serverdata>
@@ -10,6 +10,5 @@
         </serverdata>
       </paths>
     </serverData>
-    <option name="myUploadOnCheckinName" value="NAS" />
   </component>
 </project>

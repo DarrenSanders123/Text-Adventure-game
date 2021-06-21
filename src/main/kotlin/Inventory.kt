@@ -13,6 +13,9 @@ class Inventory {
     fun InInventory(item: Items): String {
         return if (inventory.contains(item)) "Available" else "Not Available"
     }
+    fun InInventoryBool(item: Items): Boolean {
+        return inventory.contains(item)
+    }
 
     fun ShowCountOfItem(item: Items): String {
         return "${inventory.filter { it == item }.size}x ${item.name}"
